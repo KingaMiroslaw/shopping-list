@@ -1,15 +1,61 @@
 .container {
-    background-color: white;
-    max-width: 40rem;
-    margin-top: 12rem;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 2rem;
-    border-radius: 1rem;
-    transition: all 0.3s linear;
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);;
+  background-color: white;
+  max-width: 40rem;
+  margin-top: 12rem;
+  margin-left: auto;
+  margin-right: auto;
+  padding: 2rem;
+  border-radius: 1rem;
+  transition: all 0.3s linear;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
 }
 
 .container:hover {
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.form-header {
+  margin-bottom: 1.75rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+.form-control {
+  display: flex;
+  justify-content: center;
+}
+
+.form-input {
+  padding: 0.25rem;
+  padding-left: 1rem;
+  font-size: 1rem;
+  background-color: rgb(230, 239, 248);
+  border-top-left-radius: 0.25rem;
+  border-bottom-left-radius: 0.25rem;
+  border-color: transparent;
+  max-width: 25rem;
+  flex: 1 auto;
+  color: rgb(128, 130, 133);
+  margin-bottom: 2rem;
+}
+
+.submit-btn {
+  background-color: rgb(188, 224, 250);
+  border-color: transparent;
+  border-top-right-radius: 0.25rem;
+  border-bottom-right-radius: 0.25rem;
+  text-align: center;
+  text-transform: capitalize;
+  padding: 0.5rem 0.75rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  font-size: 0.85rem;
+  margin-bottom: 2rem;
+}
+
+.submit-btn:hover {
+  background-color: white;
+  color: rgb(188, 224, 250);
+  border: 3px solid rgb(188, 224, 250);
+  transition: all 0.3s linear;
 }

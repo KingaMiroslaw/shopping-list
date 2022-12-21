@@ -4,6 +4,7 @@ import {
   useGetListItemsQuery,
 } from "./api/shopping-list-api/shopping-list-api";
 import classes from "./App.module.css";
+import List from "./components/List/List";
 
 function App() {
   const [name, setName] = useState("");
@@ -48,11 +49,7 @@ function App() {
         </div>
       </form>
       <div>
-        <ul>
-          {data.map((item, id) => (
-            <li key={id}>{item.productName}</li>
-          ))}
-        </ul>
+       <List listItems={data}/>
       </div>
     </main>
   );

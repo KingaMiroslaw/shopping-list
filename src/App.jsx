@@ -1,13 +1,33 @@
-import { useGetListItemsQuery } from "./api/shopping-list-api/shopping-list-api";
+import { useState } from "react";
+import {
+  useAddListItemMutation,
+  useGetListItemsQuery,
+} from "./api/shopping-list-api/shopping-list-api";
 import classes from "./App.module.css";
 
 function App() {
-  const { data = [] } = useGetListItemsQuery();
+  const [name, setName] = useState("");
+
+  const { data = [], refetch } = useGetListItemsQuery();
+
+  const [addListItem, result] = useAddListItemMutation();
+
   console.log(data); // do usunięcia
+
+  const addHandler = async () => {
+    await addListItem({
+      productName: name,
+    })
+      .unwrap()
+      .then(() => {
+        refetch();
+        setName("");
+      });
+  };
 
   const submitHandler = (e) => {
     e.preventDefault();
-    console.log("hello");
+    addHandler();
   };
 
   return (
@@ -19,6 +39,8 @@ function App() {
             type="text"
             placeholder="e.g. eggs"
             className={classes["form-input"]}
+            value={name}
+            onChange={(event) => setName(event.target.value)}
           />
           <button type="submit" className={classes["submit-btn"]}>
             submit
@@ -27,8 +49,8 @@ function App() {
       </form>
       <div>
         <ul>
-          {data.map((item, index) => (
-            <li key={index}>{item.productName}</li>
+          {data.map((item, id) => (
+            <li key={id}>{item.productName}</li>
           ))}
         </ul>
       </div>

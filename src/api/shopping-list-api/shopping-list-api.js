@@ -7,7 +7,7 @@ export const ShoppingListApi = createApi({
   }),
   endpoints: (builder) => ({
     getListItems: builder.query({
-      query: () => "/list.json",
+      query: () => "/products.json",
       transformResponse: (response) => {
         const array = [];
 
@@ -23,7 +23,14 @@ export const ShoppingListApi = createApi({
         return array;
       },
     }),
+    addListItem: builder.mutation({
+      query: (body) => ({
+        url: "/products.json",
+        method: "POST",
+        body,
+      }),
+    }),
   }),
 });
 
-export const { useGetListItemsQuery } = ShoppingListApi;
+export const { useGetListItemsQuery, useAddListItemMutation } = ShoppingListApi;

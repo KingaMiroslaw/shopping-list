@@ -1,0 +1,55 @@
+.shopping-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    text-transform: capitalize;
+    margin-bottom: 0.5rem;
+    transition: all 0.3s linear;
+    padding: 0.25rem 1rem;
+    border-radius: 0.25rem;
+    letter-spacing: 2px;
+    font-size: 1.25rem;
+    max-width: 30rem;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.shopping-item:hover {
+    background-color: rgb(230, 239, 248);
+}
+.shopping-item:hover .product-name {
+    color: rgb(128, 130, 133);
+    transition: all 0.3s linear;
+}
+
+.edit-btn,
+.delete-btn {
+  background: transparent;
+  border-color: transparent;
+  cursor: pointer;
+  font-size: 0.7rem;
+  margin: 0 0.15rem;
+  transition: all 0.3s linear;
+  padding: 0.25rem;
+}
+
+.edit-btn {
+    color: rgb(50,205,50)
+}
+
+.edit-btn:hover {
+    color: rgb(44, 160, 44)
+}
+
+.delete-btn {
+    color: rgb(255,0,0);
+}
+
+.delete-btn:hover {
+    color: rgb(207, 2, 2);
+}
+
+.icon {
+    height: 1rem;
+    width: 1rem;
+}

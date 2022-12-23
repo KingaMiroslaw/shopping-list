@@ -2,6 +2,7 @@ import { useState } from "react";
 import {
   useAddListItemMutation,
   useGetListItemsQuery,
+  useRemoveListItemMutation,
 } from "./api/shopping-list-api/shopping-list-api";
 import classes from "./App.module.css";
 import List from "./components/List/List";
@@ -12,6 +13,8 @@ function App() {
   const { data = [], refetch } = useGetListItemsQuery();
 
   const [addListItem, result] = useAddListItemMutation();
+
+  const [removeListItem] = useRemoveListItemMutation();
 
   console.log(data); // do usunięcia
 
@@ -24,6 +27,10 @@ function App() {
         refetch();
         setName("");
       });
+  };
+
+  const removeHandler = async (id) => {
+    await removeListItem(id).then(() => refetch());
   };
 
   const submitHandler = (e) => {
@@ -49,7 +56,7 @@ function App() {
         </div>
       </form>
       <div>
-       <List listItems={data}/>
+        <List listItems={data} removeItem={removeHandler} />
       </div>
     </main>
   );

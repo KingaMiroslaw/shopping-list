@@ -30,7 +30,17 @@ export const ShoppingListApi = createApi({
         body,
       }),
     }),
+    removeListItem: builder.mutation({
+      query: (id) => ({
+        url: `/products/${id}.json`,
+        method: "DELETE",
+      }),
+    }),
   }),
 });
 
-export const { useGetListItemsQuery, useAddListItemMutation } = ShoppingListApi;
+export const {
+  useGetListItemsQuery,
+  useAddListItemMutation,
+  useRemoveListItemMutation,
+} = ShoppingListApi;

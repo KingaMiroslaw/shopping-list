@@ -3,6 +3,7 @@ import {
   useAddListItemMutation,
   useGetListItemsQuery,
   useRemoveListItemMutation,
+  useRemoveAllItemsMutation,
 } from "./api/shopping-list-api/shopping-list-api";
 import classes from "./App.module.css";
 import List from "./components/List/List";
@@ -15,6 +16,8 @@ function App() {
   const [addListItem, result] = useAddListItemMutation();
 
   const [removeListItem] = useRemoveListItemMutation();
+
+  const [removeAllItems] = useRemoveAllItemsMutation();
 
   console.log(data); // do usunięcia
 
@@ -31,6 +34,10 @@ function App() {
 
   const removeHandler = async (id) => {
     await removeListItem(id).then(() => refetch());
+  };
+
+  const removeAllProductsHandler = async () => {
+    await removeAllItems().then(() => refetch());
   };
 
   const submitHandler = (e) => {
@@ -57,6 +64,11 @@ function App() {
       </form>
       <div>
         <List listItems={data} removeItem={removeHandler} />
+      </div>
+      <div>
+        <button type="submit" onClick={removeAllProductsHandler}>
+          Clear All
+        </button>
       </div>
     </main>
   );

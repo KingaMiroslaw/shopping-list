@@ -59,3 +59,29 @@
   border: 3px solid rgb(188, 224, 250);
   transition: all 0.3s linear;
 }
+
+.button-container {
+  display: flex;
+  justify-content: center;
+  padding-top: 1.75rem;
+}
+
+.clear-btn {
+  background-color: rgb(255, 0, 0);
+  color: white;
+  border-color: transparent;
+  border-radius: 0.25rem;
+  text-align: center;
+  text-transform: capitalize;
+  padding: 0.5rem 0.75rem;
+  letter-spacing: 2px;
+  cursor: pointer;
+  font-size: 0.85rem;
+}
+
+.clear-btn:hover {
+  background-color: white;
+  color: rgb(255, 0, 0);
+  border: 3px solid rgb(255, 0, 0);
+  transition: all 0.3s linear;
+}

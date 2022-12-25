@@ -65,8 +65,12 @@ function App() {
       <div>
         <List listItems={data} removeItem={removeHandler} />
       </div>
-      <div>
-        <button type="submit" onClick={removeAllProductsHandler}>
+      <div className={classes["button-container"]}>
+        <button
+          type="submit"
+          onClick={removeAllProductsHandler}
+          className={classes["clear-btn"]}
+        >
           Clear All
         </button>
       </div>

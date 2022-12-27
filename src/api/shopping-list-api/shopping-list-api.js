@@ -16,7 +16,6 @@ export const ShoppingListApi = createApi({
             array.push({
               id: key,
               productName: response[key].productName,
-              amount: response[key].amount,
             });
           }
         }

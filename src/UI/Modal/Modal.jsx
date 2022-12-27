@@ -1,10 +1,10 @@
 import classes from "./Modal.module.css";
 
-const Backdrop = () => {
-  return <div className={classes.backdrop} />;
+const Backdrop = ({ onClose }) => {
+  return <div className={classes.backdrop} onClick={onClose} />;
 };
 
-const ModalOverlay = () => {
+const ModalOverlay = ({ onClose }) => {
   return (
     <div className={classes.modal}>
       <h3 className={classes["modal-title"]}>Product editing</h3>
@@ -15,18 +15,22 @@ const ModalOverlay = () => {
         <button type="submit" className={classes["edit-btn"]}>
           accept
         </button>
-        <button type="button" className={classes["cancel-btn"]}>
+        <button
+          type="button"
+          className={classes["cancel-btn"]}
+          onClick={onClose}
+        >
           cancel
         </button>
       </div>
     </div>
   );
 };
-const Modal = () => {
+const Modal = ({ onClose }) => {
   return (
     <>
-      <Backdrop />;
-      <ModalOverlay />
+      <Backdrop onClose={onClose} />;
+      <ModalOverlay onClose={onClose} />
     </>
   );
 };

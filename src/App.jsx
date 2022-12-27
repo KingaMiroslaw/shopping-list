@@ -11,6 +11,7 @@ import Modal from "./UI/Modal/Modal";
 
 function App() {
   const [name, setName] = useState("");
+  const [isShown, setIsShown] = useState(false);
 
   const { data = [], refetch } = useGetListItemsQuery();
 
@@ -46,9 +47,17 @@ function App() {
     addHandler();
   };
 
+  const showModalHandler = () => {
+    setIsShown(true);
+  };
+
+  const hideModalHandler = () => {
+    setIsShown(false);
+  };
+
   return (
     <>
-      <Modal />
+      {isShown ? <Modal onClose={hideModalHandler} /> : null}
       <main className={classes.container}>
         <form onSubmit={submitHandler}>
           <h3 className={classes["form-header"]}>Shopping List</h3>
@@ -66,7 +75,11 @@ function App() {
           </div>
         </form>
         <div>
-          <List listItems={data} removeItem={removeHandler} />
+          <List
+            listItems={data}
+            removeItem={removeHandler}
+            showModal={showModalHandler}
+          />
         </div>
         <div className={classes["button-container"]}>
           <button

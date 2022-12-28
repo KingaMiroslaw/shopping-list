@@ -2,7 +2,7 @@ import { RiEdit2Fill } from "react-icons/ri";
 import { IoTrashBinSharp } from "react-icons/io5";
 import classes from "./List.module.css";
 
-const List = ({ listItems, removeItem, showModal }) => {
+const List = ({ listItems, removeItem, showModal, setEditedItem }) => {
   return (
     <div>
       {listItems.map((item) => {
@@ -14,7 +14,10 @@ const List = ({ listItems, removeItem, showModal }) => {
               <button
                 type="button"
                 className={classes["edit-btn"]}
-                onClick={showModal}
+                onClick={() => {
+                  showModal();
+                  setEditedItem(item);
+                }}
               >
                 <RiEdit2Fill className={classes.icon} />
               </button>

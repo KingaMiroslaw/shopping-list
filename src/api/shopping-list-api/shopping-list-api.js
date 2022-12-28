@@ -41,6 +41,16 @@ export const ShoppingListApi = createApi({
         method: "DELETE",
       }),
     }),
+    editListItem: builder.mutation({
+      query: (data) => {
+        const { id, body } = data;
+        return {
+          url: `/products/${id}.json`,
+          method: "PUT",
+          body,
+        };
+      },
+    }),
   }),
 });
 
@@ -49,4 +59,5 @@ export const {
   useAddListItemMutation,
   useRemoveListItemMutation,
   useRemoveAllItemsMutation,
+  useEditListItemMutation,
 } = ShoppingListApi;

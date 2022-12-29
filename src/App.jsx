@@ -86,7 +86,7 @@ function App() {
             listItems={data}
             removeItem={removeHandler}
             showModal={showModalHandler}
-            setEditemItem={setEditedItem}
+            setEditedItem={setEditedItem}
           />
         </div>
         <div className={classes["button-container"]}>

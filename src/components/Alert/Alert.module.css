@@ -1,0 +1,19 @@
+.alert {
+  margin-bottom: 1rem;
+  padding: 0.25rem;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 0.8rem;
+  border-radius: 0.25rem;
+  text-transform: capitalize;
+  letter-spacing: 2px;
+}
+.alert-danger {
+  color: white;
+  background-color: rgb(255, 0, 0);
+}
+.alert-success {
+  color: white;
+  background-color: rgb(50, 205, 50);
+}

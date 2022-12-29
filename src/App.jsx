@@ -6,6 +6,7 @@ import {
   useRemoveAllItemsMutation,
 } from "./api/shopping-list-api/shopping-list-api";
 import classes from "./App.module.css";
+import Alert from "./components/Alert/Alert";
 import List from "./components/List/List";
 import Modal from "./UI/Modal/Modal";
 
@@ -13,6 +14,7 @@ function App() {
   const [name, setName] = useState("");
   const [isShown, setIsShown] = useState(false);
   const [editedItem, setEditedItem] = useState(null);
+  const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
   const { data = [], refetch } = useGetListItemsQuery();
 
@@ -30,17 +32,36 @@ function App() {
     })
       .unwrap()
       .then(() => {
+        setAlert({
+          show: true,
+          msg: "product added to the list",
+          type: "success",
+        });
         refetch();
         setName("");
       });
   };
 
   const removeHandler = (id) => {
-    removeListItem(id).then(() => refetch());
+    removeListItem(id).then(() => {
+      setAlert({
+        show: true,
+        msg: "product removed from the list",
+        type: "danger",
+      });
+      refetch();
+    });
   };
 
   const removeAllProductsHandler = () => {
-    removeAllItems().then(() => refetch());
+    removeAllItems().then(() => {
+      setAlert({
+        show: true,
+        msg: "empty list",
+        type: "danger",
+      });
+      refetch();
+    });
   };
 
   const submitHandler = (e) => {
@@ -63,10 +84,12 @@ function App() {
           onClose={hideModalHandler}
           editedItem={editedItem}
           onRefetch={refetch}
+          setAlert={setAlert}
         />
       ) : null}
       <main className={classes.container}>
         <form onSubmit={submitHandler}>
+          {alert.show && <Alert {...alert} setAlert={setAlert} />}
           <h3 className={classes["form-header"]}>Shopping List</h3>
           <div className={classes["form-control"]}>
             <input

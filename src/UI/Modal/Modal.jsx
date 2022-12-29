@@ -6,7 +6,7 @@ const Backdrop = ({ onClose }) => {
   return <div className={classes.backdrop} onClick={onClose} />;
 };
 
-const ModalOverlay = ({ onClose, editedItem, onRefetch }) => {
+const ModalOverlay = ({ onClose, editedItem, onRefetch, setAlert }) => {
   const [editListItem] = useEditListItemMutation();
 
   const [value, setValue] = useState(editedItem.productName);
@@ -22,6 +22,11 @@ const ModalOverlay = ({ onClose, editedItem, onRefetch }) => {
       .then(() => {
         onRefetch();
         onClose();
+        setAlert({
+          show: true,
+          msg: "the product has been edited",
+          type: "success",
+        });
       });
   };
 
@@ -56,7 +61,7 @@ const ModalOverlay = ({ onClose, editedItem, onRefetch }) => {
   );
 };
 
-const Modal = ({ onClose, editedItem, onRefetch }) => {
+const Modal = ({ onClose, editedItem, onRefetch, setAlert }) => {
   return (
     <>
       <Backdrop onClose={onClose} />;
@@ -64,6 +69,7 @@ const Modal = ({ onClose, editedItem, onRefetch }) => {
         onClose={onClose}
         editedItem={editedItem}
         onRefetch={onRefetch}
+        setAlert={setAlert}
       />
     </>
   );

@@ -24,8 +24,8 @@ function App() {
 
   console.log(data); // do usunięcia
 
-  const addHandler = async () => {
-    await addListItem({
+  const addHandler = () => {
+    addListItem({
       productName: name,
     })
       .unwrap()
@@ -35,12 +35,12 @@ function App() {
       });
   };
 
-  const removeHandler = async (id) => {
-    await removeListItem(id).then(() => refetch());
+  const removeHandler = (id) => {
+    removeListItem(id).then(() => refetch());
   };
 
-  const removeAllProductsHandler = async () => {
-    await removeAllItems().then(() => refetch());
+  const removeAllProductsHandler = () => {
+    removeAllItems().then(() => refetch());
   };
 
   const submitHandler = (e) => {

@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { useForm } from "react-hook-form";
 import {
   useAddListItemMutation,
   useGetListItemsQuery,
@@ -11,7 +12,6 @@ import List from "./components/List/List";
 import Modal from "./UI/Modal/Modal";
 
 function App() {
-  const [name, setName] = useState("");
   const [isShown, setIsShown] = useState(false);
   const [editedItem, setEditedItem] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
@@ -24,11 +24,13 @@ function App() {
 
   const [removeAllItems] = useRemoveAllItemsMutation();
 
+  const { register, handleSubmit, reset } = useForm();
+
   console.log(data); // do usunięcia
 
-  const addHandler = () => {
+  const onSubmit = ({ productName }) => {
     addListItem({
-      productName: name,
+      productName,
     })
       .unwrap()
       .then(() => {
@@ -38,7 +40,7 @@ function App() {
           type: "success",
         });
         refetch();
-        setName("");
+        reset();
       });
   };
 
@@ -64,11 +66,6 @@ function App() {
     });
   };
 
-  const submitHandler = (e) => {
-    e.preventDefault();
-    addHandler();
-  };
-
   const showModalHandler = () => {
     setIsShown(true);
   };
@@ -88,16 +85,18 @@ function App() {
         />
       ) : null}
       <main className={classes.container}>
-        <form onSubmit={submitHandler}>
+        <form onSubmit={handleSubmit(onSubmit)}>
           {alert.show && <Alert {...alert} setAlert={setAlert} />}
           <h3 className={classes["form-header"]}>Shopping List</h3>
           <div className={classes["form-control"]}>
             <input
+              className={classes["form-input"]}
               type="text"
               placeholder="e.g. eggs"
-              className={classes["form-input"]}
-              value={name}
-              onChange={(event) => setName(event.target.value)}
+              {...register("productName", {
+                required: "required value!",
+                minLength: { value: 3, message: "minimal length is 3!" },
+              })}
             />
             <button type="submit" className={classes["submit-btn"]}>
               submit

@@ -1,6 +1,6 @@
 import { useEditListItemMutation } from "../../api/shopping-list-api/shopping-list-api";
 import classes from "./Modal.module.css";
-import { useState } from "react";
+import { useForm } from "react-hook-form";
 
 const Backdrop = ({ onClose }) => {
   return <div className={classes.backdrop} onClick={onClose} />;
@@ -9,13 +9,15 @@ const Backdrop = ({ onClose }) => {
 const ModalOverlay = ({ onClose, editedItem, onRefetch, setAlert }) => {
   const [editListItem] = useEditListItemMutation();
 
-  const [value, setValue] = useState(editedItem.productName);
+  const { register, handleSubmit } = useForm({
+    defaultValues: { editedProductName: editedItem.productName },
+  });
 
-  const editHandler = () => {
+  const onSubmit = ({ editedProductName }) => {
     editListItem({
       id: editedItem.id,
       body: {
-        productName: value,
+        productName: editedProductName,
       },
     })
       .unwrap()
@@ -31,33 +33,33 @@ const ModalOverlay = ({ onClose, editedItem, onRefetch, setAlert }) => {
   };
 
   return (
-    <div className={classes.modal}>
+    <main className={classes.modal}>
       <h3 className={classes["modal-title"]}>Product editing</h3>
-      <div className={classes["modal-control"]}>
-        <input
-          type="text"
-          className={classes["modal-input"]}
-          value={value}
-          onChange={(event) => setValue(event.target.value)}
-        />
-      </div>
-      <div className={classes["modal-buttons"]}>
-        <button
-          type="submit"
-          className={classes["edit-btn"]}
-          onClick={() => editHandler()}
-        >
-          accept
-        </button>
-        <button
-          type="button"
-          className={classes["cancel-btn"]}
-          onClick={onClose}
-        >
-          cancel
-        </button>
-      </div>
-    </div>
+      <form onSubmit={handleSubmit(onSubmit)}>
+        <div className={classes["modal-control"]}>
+          <input
+            type="text"
+            className={classes["modal-input"]}
+            {...register("editedProductName", {
+              required: "required value!",
+              minLength: { value: 3, message: "minimal length is 3!" },
+            })}
+          />
+        </div>
+        <div className={classes["modal-buttons"]}>
+          <button type="submit" className={classes["edit-btn"]}>
+            accept
+          </button>
+          <button
+            type="button"
+            className={classes["cancel-btn"]}
+            onClick={onClose}
+          >
+            cancel
+          </button>
+        </div>
+      </form>
+    </main>
   );
 };
 

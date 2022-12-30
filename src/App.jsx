@@ -17,16 +17,11 @@ function App() {
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
   const { data = [], refetch } = useGetListItemsQuery();
-
-  const [addListItem, result] = useAddListItemMutation();
-
+  const [addListItem] = useAddListItemMutation();
   const [removeListItem] = useRemoveListItemMutation();
-
   const [removeAllItems] = useRemoveAllItemsMutation();
 
   const { register, handleSubmit, reset } = useForm();
-
-  console.log(data); // do usunięcia
 
   const onSubmit = ({ productName }) => {
     addListItem({

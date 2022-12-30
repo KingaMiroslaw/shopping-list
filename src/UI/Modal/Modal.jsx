@@ -9,7 +9,11 @@ const Backdrop = ({ onClose }) => {
 const ModalOverlay = ({ onClose, editedItem, onRefetch, setAlert }) => {
   const [editListItem] = useEditListItemMutation();
 
-  const { register, handleSubmit } = useForm({
+  const {
+    register,
+    handleSubmit,
+    formState: { errors },
+  } = useForm({
     defaultValues: { editedProductName: editedItem.productName },
   });
 
@@ -45,6 +49,11 @@ const ModalOverlay = ({ onClose, editedItem, onRefetch, setAlert }) => {
               minLength: { value: 3, message: "minimal length is 3!" },
             })}
           />
+        </div>
+        <div className={classes["error-msg"]}>
+          {errors?.editedProductName ? (
+            <p>{errors.editedProductName.message}</p>
+          ) : null}
         </div>
         <div className={classes["modal-buttons"]}>
           <button type="submit" className={classes["edit-btn"]}>

@@ -44,6 +44,14 @@ function App() {
       });
   };
 
+  const onError = ({ productName }) => {
+    setAlert({
+      show: true,
+      msg: productName.message,
+      type: "danger",
+    });
+  };
+
   const removeHandler = (id) => {
     removeListItem(id).then(() => {
       setAlert({
@@ -85,7 +93,7 @@ function App() {
         />
       ) : null}
       <main className={classes.container}>
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(onSubmit, onError)}>
           {alert.show && <Alert {...alert} setAlert={setAlert} />}
           <h3 className={classes["form-header"]}>Shopping List</h3>
           <div className={classes["form-control"]}>

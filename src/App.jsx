@@ -88,7 +88,7 @@ function App() {
       ) : null}
       <main className={classes.container}>
         <form onSubmit={handleSubmit(onSubmit, onError)}>
-          {alert.show && <Alert {...alert} setAlert={setAlert} />}
+          {alert.show ? <Alert {...alert} setAlert={setAlert} /> : null}
           <h3 className={classes["form-header"]}>Shopping List</h3>
           <div className={classes["form-control"]}>
             <input

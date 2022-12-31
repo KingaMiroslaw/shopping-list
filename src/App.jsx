@@ -12,7 +12,6 @@ import List from "./components/List/List";
 import Modal from "./UI/Modal/Modal";
 
 function App() {
-  const [isShown, setIsShown] = useState(false);
   const [editedItem, setEditedItem] = useState(null);
   const [alert, setAlert] = useState({ show: false, msg: "", type: "" });
 
@@ -69,17 +68,17 @@ function App() {
     });
   };
 
-  const showModalHandler = () => {
-    setIsShown(true);
+  const showModalHandler = (item) => {
+    setEditedItem(item);
   };
 
   const hideModalHandler = () => {
-    setIsShown(false);
+    setEditedItem(null);
   };
 
   return (
     <>
-      {isShown ? (
+      {editedItem ? (
         <Modal
           onClose={hideModalHandler}
           editedItem={editedItem}
@@ -111,7 +110,6 @@ function App() {
             listItems={data}
             removeItem={removeHandler}
             showModal={showModalHandler}
-            setEditedItem={setEditedItem}
           />
         </div>
         <div className={classes["button-container"]}>
